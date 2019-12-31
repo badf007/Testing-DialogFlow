@@ -14,7 +14,9 @@ language_code = "en"  # the language the AGENT is expected to interpret
 def detectAndCall():
     path_to_watch = "."
     before = dict([(f, None) for f in os.listdir(path_to_watch)])
-    print("Original: ", ", ".join(before))
+    # print("Original: ", ", ".join(before))
+    print("Waiting for changes in the directory.")
+    print("===============================================")
     while 1:
         time.sleep(10)
         after = dict([(f, None) for f in os.listdir(path_to_watch)])
@@ -62,12 +64,13 @@ def detect_intent_stream(audio_file_path):
         # audio file.  In practice these chunks should come from
         # an audio input device.
         # add delay to wait until file is fully saved in the folder
+        print("Wait a second....")
         time.sleep(2)
         with open(audio_file_path, 'rb') as audio_file:
             while True:
                 chunk = audio_file.read(4096)
                 if not chunk:
-                    print("File not found in directory: " + audio_file_path)
+                    print("Maybe File not found in directory: " + audio_file_path)
                     break
                 # The later requests contains audio data.
                 yield dialogflow.types.StreamingDetectIntentRequest(
