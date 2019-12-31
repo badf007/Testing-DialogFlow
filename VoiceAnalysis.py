@@ -61,11 +61,13 @@ def detect_intent_stream(audio_file_path):
         # Here we are reading small chunks of audio data from a local
         # audio file.  In practice these chunks should come from
         # an audio input device.
+        # add delay to wait until file is fully saved in the folder
+        time.sleep(2)
         with open(audio_file_path, 'rb') as audio_file:
             while True:
                 chunk = audio_file.read(4096)
                 if not chunk:
-                    print("No se encontro pedazo")
+                    print("File not found in directory: " + audio_file_path)
                     break
                 # The later requests contains audio data.
                 yield dialogflow.types.StreamingDetectIntentRequest(
