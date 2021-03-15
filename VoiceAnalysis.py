@@ -100,6 +100,8 @@ def detect_intent_stream(audio_file_path):
     print('Fulfillment text: {}\n'.format(
         query_result.fulfillment_text))
 
+    print(response.output_audio)
+
 
 # runing main function
 if __name__ == "__main__":
